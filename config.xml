@@ -12,7 +12,4 @@
   <plugin name="cordova-plugin-inappbrowser" spec="1.3.0" />
   <plugin name="cordova-plugin-device" spec="1.1.2" />
   <plugin name="cordova-plugin-splashscreen" spec="3.2.2" />
-
-  <icon src="https://cdn3.iconfinder.com/data/icons/business-travel-1/512/train-01-256.png" />
-  <splash src="https://cdn3.iconfinder.com/data/icons/business-travel-1/512/train-01-256.png" />
 </widget>
