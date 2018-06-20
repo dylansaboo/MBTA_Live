@@ -13,4 +13,9 @@
   <plugin name="cordova-plugin-device" spec="1.1.2" />
   <plugin name="cordova-plugin-splashscreen" spec="3.2.2" />
   <icon density="ldpi" src="drawable-ldpi-icon.png" />
+  <icon density="mdpi" src="drawable-ldpi-icon.png" />
+  <icon density="hdpi" src="drawable-ldpi-icon.png" />
+  <icon density="xhdpi" src="drawable-ldpi-icon.png" />
+  <icon density="xxhdpi" src="drawable-ldpi-icon.png" />
+  <icon density="xxxhdpi" src="drawable-ldpi-icon.png" />
 </widget>
