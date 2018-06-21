@@ -8,6 +8,7 @@
         <title>MBTA.io - Boston Massachusetts live train tracker</title>
         <meta name="robots" content="noindex,nofollow">
         
+	<meta name="viewport" content="width=2000">
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118145649-1"></script>
         <script>
@@ -16,10 +17,33 @@
             gtag('js', new Date());
             gtag('config', 'UA-118145649-1');
         </script>
-        
+
         <link rel="icon" 
               type="image/png" 
               href="https://cdn3.iconfinder.com/data/icons/business-travel-1/512/train-01-256.png" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Geo-Location Information -->
+    <script>
+        pos1 = navigator.geolocation.getCurrentPosition(showPos);
+        var latt = 0;
+        var longg = 0;
+        var location_stop = "";
+        var maps_header = "";
+        var walking_distance_total = "";
+        function showPos(position) {
+            latt = position.coords.latitude;
+            longg = position.coords.longitude;	
+            location_stop = document.getElementById('stop_Location').innerHTML;
+            location_stop = location_stop.replace(/[^A-Z0-9]/ig, "%20");
+            location_stop = location_stop + "%20MBTA";
+            maps_header = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=" + latt + "," + longg + "&destination=" + location_stop + "&mode=walking&arrival_time=1391374800&key=AIzaSyDRX2H1Wl0e9ECdKRo3ZtajtpRxdgiG-LM";
+            maps_header = maps_header.toString();
+            var address = "";
+            $.getJSON(maps_header, function (json) {
+                walking_distance_total = json.routes[0].legs[0].duration.text;
+            });
+        }
+        </script>
     </head>
 <title>MBTA Live</title>
 <meta charset="UTF-8">
@@ -29,7 +53,18 @@
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}
 .w3-bar-block .w3-bar-item {padding:20px}
-    #myInput {
+.resp-container {
+	position: relative;
+	overflow: hidden;
+	}
+.resp-iframe {
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 400px;
+	border: 0;
+}
+        #myInput {
     background-image: url('/css/searchicon.png'); /* Add a search icon to input */
     background-position: 10px 12px; /* Position the search icon */
     background-repeat: no-repeat; /* Do not repeat the icon image */
@@ -63,7 +98,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}
 }
 </style>
 <body>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Sidebar (hidden by default) -->
 <nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
   <a href="javascript:void(0)" onclick="w3_close()"
@@ -249,13 +284,38 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}
           });
       </script>
     <div class="w3-center w3-padding-16"><img src="https://cdn3.iconfinder.com/data/icons/business-travel-1/512/train-01-256.png" alt="" style="width:40px;height:40px;"> MBTA.io</div>
+    <div class="w3-right" style="position: relative; top: -85px; padding-right: 10px; font-size: 15px" id='walking_distance'></div>
   </div>
 </div>
   
 <!-- !PAGE CONTENT! -->
-<div class="w3-main w3-center w3-content w3-padding" style="max-width:1200px;margin-top:100px">
-    <h3>Please Choose a Stop from our Drop Down</h3>
-    <h5>Green Line is still in beta. Data may have errors</h5>
+<div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px">
+    <h3 id='stop_Location'>{{stop_name}} | {{route_name}}</h3>
+  <!-- First Photo Grid-->
+  <div class="w3-padding-16">
+    <div class="resp-container">
+        <iframe class="resp-iframe"
+                 width="572"
+                 height="450"
+                 frameborder="0" style="border:0"
+                 src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD_kdRfKhXAAgGbLVCXGHC3vSRNOOoHc0c&q={{vehicle_latS}},+{{vehicle_lonS}}" allowfullscreen>
+        </iframe>
+      <h5>{{route_directionS}} to {{route_direction_headsignS}}</h5>
+      <h2>Now : {{seconds_awayS}} Min Away</h2>
+      <h2>Next: {{seconds_away_twoS}} Min Away</h2>
+    </div>
+
+    <div class="resp-container">
+      <iframe class="resp-iframe"
+                 width="572"
+                 height="450"
+                 frameborder="0" style="border:0"
+                 src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD_kdRfKhXAAgGbLVCXGHC3vSRNOOoHc0c&q={{vehicle_latN}},+{{vehicle_lonN}}" allowfullscreen>
+        </iframe>
+       <h5>{{route_directionN}} to {{route_direction_headsignN}}</h5>
+       <h2>Now : {{seconds_awayN}} Min Away</h2>
+       <h2>Next: {{seconds_away_twoN}} Min Away</h2>
+    </div>
   </div>
   
   
@@ -288,6 +348,15 @@ function w3_close() {
 }
 </script>
 
+<script>
+function distancee() {
+	if(walking_distance_total != "") {
+		$("#walking_distance").append("<p>" + walking_distance_total + " Walking" + "</p>") 
+	}
+}
+$(window).load(setTimeout(distancee, 2600));	
+</script>
+
 <!-- Search Bar -->
 <script>
 function myFunction() {
@@ -309,7 +378,6 @@ function myFunction() {
     }
 }
 </script>
-
-
+    
 </body>
 </html>
