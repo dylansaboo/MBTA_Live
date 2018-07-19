@@ -1,27 +1,38 @@
 <!DOCTYPE html>
 <html>
-    <head profile="http://www.w3.org/2005/10/profile">
-        
-        <!-- Site Search Engine Meta -->
-        <meta charset="utf-8">
-        <meta name="Description" CONTENT="Track trains for the Boston MBTA system">
-        <title>MBTA.io - Boston Massachusetts live train tracker</title>
-        <meta name="robots" content="noindex,nofollow">
-        
-	<meta name="viewport" content="width=2000">
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118145649-1"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'UA-118145649-1');
-        </script>
 
-        <link rel="icon" 
-              type="image/png" 
-              href="https://cdn3.iconfinder.com/data/icons/business-travel-1/512/train-01-256.png" />
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<head>
+
+    <!-- Site Search Engine Meta -->
+    <meta charset="utf-8">
+    <meta name="Description" CONTENT="Track trains for the Boston MBTA system">
+    <title>MBTA.io - Boston Massachusetts live train tracker</title>
+    <meta name="robots" content="noindex,nofollow">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118145649-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'UA-118145649-1');
+
+    </script>
+
+    <link rel="icon" type="image/png" href="https://cdn3.iconfinder.com/data/icons/business-travel-1/512/train-01-256.png" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="style5.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!-- Geo-Location Information -->
     <script>
         pos1 = navigator.geolocation.getCurrentPosition(showPos);
@@ -30,354 +41,696 @@
         var location_stop = "";
         var maps_header = "";
         var walking_distance_total = "";
+
         function showPos(position) {
+            pos1 = navigator.geolocation.getCurrentPosition(showPos);
             latt = position.coords.latitude;
-            longg = position.coords.longitude;	
+            longg = position.coords.longitude;
             location_stop = document.getElementById('stop_Location').innerHTML;
             location_stop = location_stop.replace(/[^A-Z0-9]/ig, "%20");
             location_stop = location_stop + "%20MBTA";
             maps_header = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=" + latt + "," + longg + "&destination=" + location_stop + "&mode=walking&arrival_time=1391374800&key=AIzaSyDRX2H1Wl0e9ECdKRo3ZtajtpRxdgiG-LM";
             maps_header = maps_header.toString();
             var address = "";
-            $.getJSON(maps_header, function (json) {
+            $.getJSON(maps_header, function(json) {
                 walking_distance_total = json.routes[0].legs[0].duration.text;
             });
+            return this.walking_distance_total;
         }
-        </script>
-    </head>
-<title>MBTA Live</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+
+    </script>
+
+
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+
+</head>
 <style>
-body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}
-.w3-bar-block .w3-bar-item {padding:20px}
-.resp-container {
-	position: relative;
-	overflow: hidden;
-	}
-.resp-iframe {
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 400px;
-	border: 0;
-}
-        #myInput {
-    background-image: url('/css/searchicon.png'); /* Add a search icon to input */
-    background-position: 10px 12px; /* Position the search icon */
-    background-repeat: no-repeat; /* Do not repeat the icon image */
-    width: 100%; /* Full-width */
-    font-size: 16px; /* Increase font-size */
-    padding: 12px 20px 12px 40px; /* Add some padding */
-    border: 1px solid #ddd; /* Add a grey border */
-    margin-bottom: 12px; /* Add some space below the input */
-}
+    @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
-#myUL {
-    /* Remove default list styling */
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
 
-#myUL li a {
-    border: 1px solid #ddd; /* Add a border to all links */
-    margin-top: -1px; /* Prevent double borders */
-    background-color: #f6f6f6; /* Grey background color */
-    padding: 12px; /* Add some padding */
-    text-decoration: none; /* Remove default text underline */
-    font-size: 18px; /* Increase the font-size */
-    color: black; /* Add a black text color */
-    display: block; /* Make it into a block element to fill the whole list */
-}
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: #fafafa;
+    }
 
-#myUL li a:hover:not(.header) {
-    background-color: #eee; /* Add a hover effect to all links, except for headers */
-}
-</style>
-<body>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- Sidebar (hidden by default) -->
-<nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
-  <a href="javascript:void(0)" onclick="w3_close()"
-  class="w3-bar-item w3-button">Close Menu</a>
-    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Stops..">
-        <ul>
-        <li id="myList" class="ul">Orange Line
-            <ul>
-                <li><a href="https://mbta.io/Orange/place-ogmnl" onclick="w3_close()" class="w3-bar-item w3-button">Oak Grove</a></li>
-                <li><a href="https://mbta.io/Orange/place-mlmnl" onclick="w3_close()" class="w3-bar-item w3-button">Malden Center</a></li>
-                <li><a href="https://mbta.io/Orange/place-welln" onclick="w3_close()" class="w3-bar-item w3-button">Wellington</a></li>
-                <li><a href="https://mbta.io/Orange/place-astao" onclick="w3_close()" class="w3-bar-item w3-button">Assembly</a></li>
-                <li><a href="https://mbta.io/Orange/place-sull" onclick="w3_close()" class="w3-bar-item w3-button">Sullivan Square</a></li>
-                <li><a href="https://mbta.io/Orange/place-ccmnl" onclick="w3_close()" class="w3-bar-item w3-button">Community College</a></li>
-                <li><a href="https://mbta.io/Orange/place-north" onclick="w3_close()" class="w3-bar-item w3-button">North Station</a></li>
-                <li><a href="https://mbta.io/Orange/place-haecl" onclick="w3_close()" class="w3-bar-item w3-button">Haymarket</a></li>
-                <li><a href="https://mbta.io/Orange/place-state" onclick="w3_close()" class="w3-bar-item w3-button">State Street</a></li>
-                <li><a href="https://mbta.io/Orange/place-dwnxg" onclick="w3_close()" class="w3-bar-item w3-button">Downtown Crossing</a></li>
-                <li><a href="https://mbta.io/Orange/place-chncl" onclick="w3_close()" class="w3-bar-item w3-button">Chinatown</a></li>
-                <li><a href="https://mbta.io/Orange/place-tumnl" onclick="w3_close()" class="w3-bar-item w3-button">Tufts Medical Center</a></li>
-                <li><a href="https://mbta.io/Orange/place-bbsta" onclick="w3_close()" class="w3-bar-item w3-button">Back Bay</a></li>
-                <li><a href="https://mbta.io/Orange/place-masta" onclick="w3_close()" class="w3-bar-item w3-button">Massachusetts Ave.</a></li>
-                <li><a href="https://mbta.io/Orange/place-rugg" onclick="w3_close()" class="w3-bar-item w3-button">Ruggles</a></li>
-                <li><a href="https://mbta.io/Orange/place-rcmnl" onclick="w3_close()" class="w3-bar-item w3-button">Roxbury Crossing</a></li>
-                <li><a href="https://mbta.io/Orange/place-jaksn" onclick="w3_close()" class="w3-bar-item w3-button">Jackson Square</a></li>
-                <li><a href="https://mbta.io/Orange/place-sbmnl" onclick="w3_close()" class="w3-bar-item w3-button">Stony Brook</a></li>
-                <li><a href="https://mbta.io/Orange/place-grnst" onclick="w3_close()" class="w3-bar-item w3-button">Green Street</a></li>
-                <li><a href="https://mbta.io/Orange/place-forhl" onclick="w3_close()" class="w3-bar-item w3-button">Forest Hill</a></li>
-            </ul>
-        </li>
-        <li id="myList2" class="ul">Red Line
-            <ul>
-                <li><a href="https://mbta.io/Red/place-alfcl" onclick="w3_close()" class="w3-bar-item w3-button">Alewife</a></li>
-                <li><a href="https://mbta.io/Red/place-davis" onclick="w3_close()" class="w3-bar-item w3-button">Davis</a></li>
-                <li><a href="https://mbta.io/Red/place-portr" onclick="w3_close()" class="w3-bar-item w3-button">Porter</a></li>
-                <li><a href="https://mbta.io/Red/place-harsq" onclick="w3_close()" class="w3-bar-item w3-button">Harvard</a></li>
-                <li><a href="https://mbta.io/Red/place-cntsq" onclick="w3_close()" class="w3-bar-item w3-button">Central</a></li>
-                <li><a href="https://mbta.io/Red/place-knncl" onclick="w3_close()" class="w3-bar-item w3-button">Kendall / MIT</a></li>
-                <li><a href="https://mbta.io/Red/place-chmnl" onclick="w3_close()" class="w3-bar-item w3-button">Charles / MGH</a></li>
-                <li><a href="https://mbta.io/Red/place-pktrm" onclick="w3_close()" class="w3-bar-item w3-button">Park Street</a></li>
-                <li><a href="https://mbta.io/Red/place-dwnxg" onclick="w3_close()" class="w3-bar-item w3-button">Downtown Crossing</a></li>
-                <li><a href="https://mbta.io/Red/place-sstat" onclick="w3_close()" class="w3-bar-item w3-button">South Station</a></li>
-                <li><a href="https://mbta.io/Red/place-brdwy" onclick="w3_close()" class="w3-bar-item w3-button">Broadway</a></li>
-                <li><a href="https://mbta.io/Red/place-andrw" onclick="w3_close()" class="w3-bar-item w3-button">Andrew</a></li>
-                <li><a href="https://mbta.io/Red/place-jfk" onclick="w3_close()" class="w3-bar-item w3-button">JFK / UMass</a></li>
-		        <li><a href="https://mbta.io/Red/place-shmnl" onclick="w3_close()" class="w3-bar-item w3-button">Savin Hill</a></li>
-		        <li><a href="https://mbta.io/Red/place-fldcr" onclick="w3_close()" class="w3-bar-item w3-button">Fields Corner</a></li>
-                <li><a href="https://mbta.io/Red/place-smmnl" onclick="w3_close()" class="w3-bar-item w3-button">Shawmut</a></li>
-	           	<li><a href="https://mbta.io/Red/place-asmnl" onclick="w3_close()" class="w3-bar-item w3-button">Ashmont</a></li>
-                <li><a href="https://mbta.io/Red/place-nqncy" onclick="w3_close()" class="w3-bar-item w3-button">North Quincy</a></li>
-                <li><a href="https://mbta.io/Red/place-qnctr" onclick="w3_close()" class="w3-bar-item w3-button">Quincy Center</a></li>
-                <li><a href="https://mbta.io/Red/place-qamnl" onclick="w3_close()" class="w3-bar-item w3-button">Quincy Adams</a></li>
-                <li><a href="https://mbta.io/Red/place-brntn" onclick="w3_close()" class="w3-bar-item w3-button">Braintree</a></li>
-            </ul>
-        </li>
-        <li id="myList3" class="ul">Green Line B
-            <ul>
-                <li><a href="https://mbta.io/Green-B/place-pktrm" onclick="w3_close()" class="w3-bar-item w3-button">Park Street</a></li>
-                <li><a href="https://mbta.io/Green-B/place-boyls" onclick="w3_close()" class="w3-bar-item w3-button">Boylston</a></li>
-                <li><a href="https://mbta.io/Green-B/place-armnl" onclick="w3_close()" class="w3-bar-item w3-button">Arlington</a></li>
-                <li><a href="https://mbta.io/Green-B/place-coecl" onclick="w3_close()" class="w3-bar-item w3-button">Copley</a></li>
-                <li><a href="https://mbta.io/Green-B/place-hymnl" onclick="w3_close()" class="w3-bar-item w3-button">Hynes Convention Center</a></li>
-                <li><a href="https://mbta.io/Green-B/place-kencl" onclick="w3_close()" class="w3-bar-item w3-button">Kenmore</a></li>
-                <li><a href="https://mbta.io/Green-B/place-bland" onclick="w3_close()" class="w3-bar-item w3-button">Blandford Street</a></li>
-                <li><a href="https://mbta.io/Green-B/place-buest" onclick="w3_close()" class="w3-bar-item w3-button">Boston University East</a></li>
-		        <li><a href="https://mbta.io/Green-B/place-bucen" onclick="w3_close()" class="w3-bar-item w3-button">Boston University Central</a></li>
-		        <li><a href="https://mbta.io/Green-B/place-buwst" onclick="w3_close()" class="w3-bar-item w3-button">Boston University West</a></li>
-                <li><a href="https://mbta.io/Green-B/place-stplb" onclick="w3_close()" class="w3-bar-item w3-button">Saint Paul Street</a></li>
-	           	<li><a href="https://mbta.io/Green-B/place-plsgr" onclick="w3_close()" class="w3-bar-item w3-button">Pleasant Street</a></li>
-                <li><a href="https://mbta.io/Green-B/place-babck" onclick="w3_close()" class="w3-bar-item w3-button">Babcock Street</a></li>
-                <li><a href="https://mbta.io/Green-B/place-brico" onclick="w3_close()" class="w3-bar-item w3-button">Packards Corner</a></li>
-                <li><a href="https://mbta.io/Green-B/place-harvd" onclick="w3_close()" class="w3-bar-item w3-button">Harvard Avenue</a></li>
-                <li><a href="https://mbta.io/Green-B/place-grigg" onclick="w3_close()" class="w3-bar-item w3-button">Griggs Street</a></li>
-                <li><a href="https://mbta.io/Green-B/place-alsgr" onclick="w3_close()" class="w3-bar-item w3-button">Allston Street</a></li>
-                <li><a href="https://mbta.io/Green-B/place-wrnst" onclick="w3_close()" class="w3-bar-item w3-button">Warren Street</a></li>
-                <li><a href="https://mbta.io/Green-B/place-wascm" onclick="w3_close()" class="w3-bar-item w3-button">Washington Street</a></li>
-                <li><a href="https://mbta.io/Green-B/place-sthld" onclick="w3_close()" class="w3-bar-item w3-button">Sutherland Road</a></li>
-                <li><a href="https://mbta.io/Green-B/place-chswk" onclick="w3_close()" class="w3-bar-item w3-button">Chiswick Road</a></li>
-                <li><a href="https://mbta.io/Green-B/place-chill" onclick="w3_close()" class="w3-bar-item w3-button">Chestnut Hill Avenue</a></li>
-                <li><a href="https://mbta.io/Green-B/place-sougr" onclick="w3_close()" class="w3-bar-item w3-button">South Street</a></li>
-                <li><a href="https://mbta.io/Green-B/place-lake" onclick="w3_close()" class="w3-bar-item w3-button">Boston College</a></li>
-            </ul>
-        </li>
-        <li id="myList4" class="ul">Green Line C
-            <ul>
-                <li><a href="https://mbta.io/Green-C/place-clmnl" onclick="w3_close()" class="w3-bar-item w3-button">Cleveland Circle</a></li>
-                <li><a href="https://mbta.io/Green-C/place-engav" onclick="w3_close()" class="w3-bar-item w3-button">Englewood Avenue</a></li>
-                <li><a href="https://mbta.io/Green-C/place-denrd" onclick="w3_close()" class="w3-bar-item w3-button">Dean Road</a></li>
-                <li><a href="https://mbta.io/Green-C/place-tapst" onclick="w3_close()" class="w3-bar-item w3-button">Tappan Street</a></li>
-                <li><a href="https://mbta.io/Green-C/place-bcnwa" onclick="w3_close()" class="w3-bar-item w3-button">Washington Square</a></li>
-                <li><a href="https://mbta.io/Green-C/place-fbkst" onclick="w3_close()" class="w3-bar-item w3-button">Fairbanks Street</a></li>
-                <li><a href="https://mbta.io/Green-C/place-bndhl" onclick="w3_close()" class="w3-bar-item w3-button">Brandon Hall</a></li>
-                <li><a href="https://mbta.io/Green-C/place-sumav" onclick="w3_close()" class="w3-bar-item w3-button">Summit Avenue</a></li>
-		        <li><a href="https://mbta.io/Green-C/place-cool" onclick="w3_close()" class="w3-bar-item w3-button">Coolidge Corner</a></li>
-		        <li><a href="https://mbta.io/Green-C/place-stpul" onclick="w3_close()" class="w3-bar-item w3-button">Saint Paul Street</a></li>
-                <li><a href="https://mbta.io/Green-C/place-kntst" onclick="w3_close()" class="w3-bar-item w3-button">Kent Street</a></li>
-	           	<li><a href="https://mbta.io/Green-C/place-hwsst" onclick="w3_close()" class="w3-bar-item w3-button">Hawes Street</a></li>
-                <li><a href="https://mbta.io/Green-C/place-smary" onclick="w3_close()" class="w3-bar-item w3-button">Saint Marys Street</a></li>
-                <li><a href="https://mbta.io/Green-C/place-kencl" onclick="w3_close()" class="w3-bar-item w3-button">Kenmore</a></li>
-                <li><a href="https://mbta.io/Green-C/place-hymnl" onclick="w3_close()" class="w3-bar-item w3-button">Hynes Convention Center</a></li>
-                <li><a href="https://mbta.io/Green-C/place-coecl" onclick="w3_close()" class="w3-bar-item w3-button">Copley</a></li>
-                <li><a href="https://mbta.io/Green-C/place-armnl" onclick="w3_close()" class="w3-bar-item w3-button">Arlington</a></li>
-                <li><a href="https://mbta.io/Green-C/place-boyls" onclick="w3_close()" class="w3-bar-item w3-button">Boylston</a></li>
-                <li><a href="https://mbta.io/Green-C/place-pktrm" onclick="w3_close()" class="w3-bar-item w3-button">Park Street</a></li>
-                <li><a href="https://mbta.io/Green-C/place-gover" onclick="w3_close()" class="w3-bar-item w3-button">Government Center</a></li>
-                <li><a href="https://mbta.io/Green-C/place-haecl" onclick="w3_close()" class="w3-bar-item w3-button">Haymarket</a></li>
-                <li><a href="https://mbta.io/Green-C/place-north" onclick="w3_close()" class="w3-bar-item w3-button">North Station</a></li>
-            </ul>
-        </li>
-        <li id="myList5" class="ul">Green Line D
-            <ul>
-                <li><a href="https://mbta.io/Green-D/place-river" onclick="w3_close()" class="w3-bar-item w3-button">Riverside</a></li>
-                <li><a href="https://mbta.io/Green-D/place-woodl" onclick="w3_close()" class="w3-bar-item w3-button">Woodland</a></li>
-                <li><a href="https://mbta.io/Green-D/place-waban" onclick="w3_close()" class="w3-bar-item w3-button">Waban</a></li>
-                <li><a href="https://mbta.io/Green-D/place-eliot" onclick="w3_close()" class="w3-bar-item w3-button">Eliot</a></li>
-                <li><a href="https://mbta.io/Green-D/place-newtn" onclick="w3_close()" class="w3-bar-item w3-button">Newton Highlands</a></li>
-                <li><a href="https://mbta.io/Green-D/place-newto" onclick="w3_close()" class="w3-bar-item w3-button">Newton Centre</a></li>
-                <li><a href="https://mbta.io/Green-D/place-chhil" onclick="w3_close()" class="w3-bar-item w3-button">Chestnut Hill</a></li>
-                <li><a href="https://mbta.io/Green-D/place-rsmnl" onclick="w3_close()" class="w3-bar-item w3-button">Reservoir</a></li>
-		        <li><a href="https://mbta.io/Green-D/place-bcnfd" onclick="w3_close()" class="w3-bar-item w3-button">Beaconsfield</a></li>
-		        <li><a href="https://mbta.io/Green-D/place-brkhl" onclick="w3_close()" class="w3-bar-item w3-button">Brookline Hills</a></li>
-                <li><a href="https://mbta.io/Green-D/place-bvmnl" onclick="w3_close()" class="w3-bar-item w3-button">Brookline Village</a></li>
-	           	<li><a href="https://mbta.io/Green-D/place-longw" onclick="w3_close()" class="w3-bar-item w3-button">Longwood</a></li>
-                <li><a href="https://mbta.io/Green-D/place-fenwy" onclick="w3_close()" class="w3-bar-item w3-button">Fenway</a></li>
-                <li><a href="https://mbta.io/Green-D/place-kencl" onclick="w3_close()" class="w3-bar-item w3-button">Kenmore</a></li>
-                <li><a href="https://mbta.io/Green-D/place-hymnl" onclick="w3_close()" class="w3-bar-item w3-button">Hynes Convention Center</a></li>
-                <li><a href="https://mbta.io/Green-D/place-coecl" onclick="w3_close()" class="w3-bar-item w3-button">Copley</a></li>
-                <li><a href="https://mbta.io/Green-D/place-armnl" onclick="w3_close()" class="w3-bar-item w3-button">Arlington</a></li>
-                <li><a href="https://mbta.io/Green-D/place-boyls" onclick="w3_close()" class="w3-bar-item w3-button">Boylston</a></li>
-                <li><a href="https://mbta.io/Green-D/place-pktrm" onclick="w3_close()" class="w3-bar-item w3-button">Park Street</a></li>
-                <li><a href="https://mbta.io/Green-D/place-gover" onclick="w3_close()" class="w3-bar-item w3-button">Government Center</a></li>
-            </ul>
-        </li>
-        <li id="myList6" class="ul">Green Line E
-            <ul>
-                <li><a href="https://mbta.io/Green-E/place-hsmnl" onclick="w3_close()" class="w3-bar-item w3-button">Heath Street</a></li>
-                <li><a href="https://mbta.io/Green-E/place-bckhl" onclick="w3_close()" class="w3-bar-item w3-button">Back of the Hill</a></li>
-                <li><a href="https://mbta.io/Green-E/place-rvrwy" onclick="w3_close()" class="w3-bar-item w3-button">Riverway</a></li>
-                <li><a href="https://mbta.io/Green-E/place-mispk" onclick="w3_close()" class="w3-bar-item w3-button">Mission Park</a></li>
-                <li><a href="https://mbta.io/Green-E/place-fenwd" onclick="w3_close()" class="w3-bar-item w3-button">Fenwood Road</a></li>
-                <li><a href="https://mbta.io/Green-E/place-brmnl" onclick="w3_close()" class="w3-bar-item w3-button">Brigham Circle</a></li>
-                <li><a href="https://mbta.io/Green-E/place-lngmd" onclick="w3_close()" class="w3-bar-item w3-button">Longwood Medical Area</a></li>
-                <li><a href="https://mbta.io/Green-E/place-mfa" onclick="w3_close()" class="w3-bar-item w3-button">Museum of Fine Arts</a></li>
-		        <li><a href="https://mbta.io/Green-E/place-nuniv" onclick="w3_close()" class="w3-bar-item w3-button">Northeastern University</a></li>
-		        <li><a href="https://mbta.io/Green-E/place-symcl" onclick="w3_close()" class="w3-bar-item w3-button">Symphony</a></li>
-                <li><a href="https://mbta.io/Green-E/place-prmnl" onclick="w3_close()" class="w3-bar-item w3-button">Prudential</a></li>
-	           	<li><a href="https://mbta.io/Green-E/place-coecl" onclick="w3_close()" class="w3-bar-item w3-button">Copley</a></li>
-                <li><a href="https://mbta.io/Green-E/place-armnl" onclick="w3_close()" class="w3-bar-item w3-button">Arlington</a></li>
-                <li><a href="https://mbta.io/Green-E/place-boyls" onclick="w3_close()" class="w3-bar-item w3-button">Boylston</a></li>
-                <li><a href="https://mbta.io/Green-E/place-pktrm" onclick="w3_close()" class="w3-bar-item w3-button">Park Street</a></li>
-                <li><a href="https://mbta.io/Green-E/place-gover" onclick="w3_close()" class="w3-bar-item w3-button">Government Center</a></li>
-                <li><a href="https://mbta.io/Green-E/place-haecl" onclick="w3_close()" class="w3-bar-item w3-button">Haymarket</a></li>
-                <li><a href="https://mbta.io/Green-E/place-north" onclick="w3_close()" class="w3-bar-item w3-button">North Station</a></li>
-                <li><a href="https://mbta.io/Green-E/place-spmnl" onclick="w3_close()" class="w3-bar-item w3-button">Science Park</a></li>
-                <li><a href="https://mbta.io/Green-E/place-lech" onclick="w3_close()" class="w3-bar-item w3-button">Lechmere</a></li>
-            </ul>
-        </li>
-    </ul>
-</nav>
+    #myInput {
+        background-image: url('/css/searchicon.png');
+        /* Add a search icon to input */
+        background-position: 10px 12px;
+        /* Position the search icon */
+        background-repeat: no-repeat;
+        /* Do not repeat the icon image */
+        width: 100%;
+        /* Full-width */
+        font-size: 16px;
+        /* Increase font-size */
+        padding: 12px 20px 12px 40px;
+        /* Add some padding */
+        border: 1px solid #ddd;
+        /* Add a grey border */
+        margin-bottom: 12px;
+        /* Add some space below the input */
+    }
 
-<!-- Top menu -->
-<div class="w3-top">
-  <div class="w3-white w3-xlarge" style="max-width:1200px;margin:auto">
-    <div id="theClick" class="w3-button w3-padding-16 w3-left" onclick="w3_open()">☰</div>
-      
-      <!-- Auto Select Textbox on Sidebar Open -->
-      <script>
-          var on = (function(){
-              if (window.addEventListener) {
-                  return function(target, type, listener){
-                      target.addEventListener(type, listener, false);
-                  };
-              }
-              else {
-                  return function(object, sEvent, fpNotify){
-                      object.attachEvent("on" + sEvent, fpNotify);
-                  };
-              }
-          }());
-          var el = document.getElementById('theClick');
-          on(el, "click", function(){
-              document.getElementById('myInput').focus();
-          });
-      </script>
-    <div class="w3-center w3-padding-16"><img src="https://cdn3.iconfinder.com/data/icons/business-travel-1/512/train-01-256.png" alt="" style="width:40px;height:40px;"> MBTA.io</div>
-    <div class="w3-right" style="position: relative; top: -85px; padding-right: 10px; font-size: 15px" id='walking_distance'></div>
-  </div>
-</div>
-  
-<!-- !PAGE CONTENT! -->
-<div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px">
-    <h3 id='stop_Location'>{{stop_name}} | {{route_name}}</h3>
-  <!-- First Photo Grid-->
-  <div class="w3-padding-16">
-    <div class="resp-container">
-        <iframe class="resp-iframe"
-                 width="572"
-                 height="450"
-                 frameborder="0" style="border:0"
-                 src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD_kdRfKhXAAgGbLVCXGHC3vSRNOOoHc0c&q={{vehicle_latS}},+{{vehicle_lonS}}" allowfullscreen>
-        </iframe>
-      <h5>{{route_directionS}} to {{route_direction_headsignS}}</h5>
-      <h2>Now : {{seconds_awayS}} Min Away</h2>
-      <h2>Next: {{seconds_away_twoS}} Min Away</h2>
-    </div>
+    .resp-container {
+        position: relative;
+        overflow: hidden;
+    }
 
-    <div class="resp-container">
-      <iframe class="resp-iframe"
-                 width="572"
-                 height="450"
-                 frameborder="0" style="border:0"
-                 src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD_kdRfKhXAAgGbLVCXGHC3vSRNOOoHc0c&q={{vehicle_latN}},+{{vehicle_lonN}}" allowfullscreen>
-        </iframe>
-       <h5>{{route_directionN}} to {{route_direction_headsignN}}</h5>
-       <h2>Now : {{seconds_awayN}} Min Away</h2>
-       <h2>Next: {{seconds_away_twoN}} Min Away</h2>
-    </div>
-  </div>
-  
-  
-  <!-- Pagination 
-  <div class="w3-center w3-padding-32">
-    <div class="w3-bar">
-      <a href="#" class="w3-bar-item w3-button w3-hover-black">«</a>
-      <a href="#" class="w3-bar-item w3-black w3-button">1</a>
-      <a href="#" class="w3-bar-item w3-button w3-hover-black">2</a>
-      <a href="#" class="w3-bar-item w3-button w3-hover-black">3</a>
-      <a href="#" class="w3-bar-item w3-button w3-hover-black">4</a>
-      <a href="#" class="w3-bar-item w3-button w3-hover-black">»</a>
-    </div>
-  </div> -->
+    .resp-iframe {
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 400px;
+        border: 0;
+    }
 
-    
-  </footer>
+    #myUL {
+        /* Remove default list styling */
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
 
-<!-- End page content -->
-</div>
+    #myUL li a {
+        border: 1px solid #ddd;
+        /* Add a border to all links */
+        margin-top: -1px;
+        /* Prevent double borders */
+        background-color: #f6f6f6;
+        /* Grey background color */
+        padding: 12px;
+        /* Add some padding */
+        text-decoration: none;
+        /* Remove default text underline */
+        font-size: 18px;
+        /* Increase the font-size */
+        color: black;
+        /* Add a black text color */
+        display: block;
+        /* Make it into a block element to fill the whole list */
+    }
 
-<script>
-// Script to open and close sidebar
-function w3_open() {
-    document.getElementById("mySidebar").style.display = "block";
-}
- 
-function w3_close() {
-    document.getElementById("mySidebar").style.display = "none";
-}
-</script>
+    #myUL li a:hover:not(.header) {
+        background-color: #eee;
+        /* Add a hover effect to all links, except for headers */
+    }
 
-<script>
-function distancee() {
-	if(walking_distance_total != "") {
-		$("#walking_distance").append("<p>" + walking_distance_total + " Walking" + "</p>") 
-	}
-}
-$(window).load(setTimeout(distancee, 2600));	
-</script>
+    p {
+        font-family: 'Poppins', sans-serif;
+        font-size: 1.1em;
+        font-weight: 300;
+        line-height: 1.7em;
+        color: #999;
+    }
 
-<!-- Search Bar -->
-<script>
-function myFunction() {
-    // Declare variables
-    var input, filter, ul, li, a, i;
-    input = document.getElementById('myInput');
-    filter = input.value.toUpperCase();
-    ul = document.getElementById("myList");
-    li = document.querySelectorAll(".ul li");
+    a,
+    a:hover,
+    a:focus {
+        color: inherit;
+        text-decoration: none;
+        transition: all 0.3s;
+    }
 
-    // Loop through all list items, and hide those who don't match the search query
-    for (i = 0; i < li.length; i++) {
-        a = li[i].getElementsByTagName("a")[0];
-        if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
-            li[i].style.display = "";
-        } else {
-            li[i].style.display = "none";
+    .navbar {
+        padding: 15px 10px;
+        background: #fff;
+        border: none;
+        border-radius: 0;
+        margin-bottom: 40px;
+        box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-btn {
+        box-shadow: none;
+        outline: none !important;
+        border: none;
+    }
+
+    .line {
+        width: 100%;
+        height: 1px;
+        border-bottom: 1px dashed #ddd;
+        margin: 40px 0;
+    }
+
+    /* ---------------------------------------------------
+    SIDEBAR STYLE
+----------------------------------------------------- */
+
+    .wrapper {
+        display: flex;
+        width: 100%;
+        align-items: stretch;
+        perspective: 1500px;
+    }
+
+
+    #sidebar {
+        min-width: 250px;
+        max-width: 250px;
+        background: #7386D5;
+        color: #fff;
+        transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
+        transform-origin: bottom left;
+    }
+
+    #sidebar.active {
+        margin-left: -250px;
+        transform: rotateY(100deg);
+    }
+
+    #sidebar .sidebar-header {
+        padding: 20px;
+        background: #6d7fcc;
+    }
+
+    #sidebar ul.components {
+        padding: 20px 0;
+        border-bottom: 1px solid #47748b;
+    }
+
+    #sidebar ul p {
+        color: #fff;
+        padding: 10px;
+    }
+
+    #sidebar ul li a {
+        padding: 10px;
+        font-size: 1.1em;
+        display: block;
+    }
+
+    #sidebar ul li a:hover {
+        color: #7386D5;
+        background: #fff;
+    }
+
+    #sidebar ul li.active>a,
+    a[aria-expanded="true"] {
+        color: #fff;
+        background: #6d7fcc;
+    }
+
+
+    a[data-toggle="collapse"] {
+        position: relative;
+    }
+
+    .dropdown-toggle::after {
+        display: block;
+        position: absolute;
+        top: 50%;
+        right: 20px;
+        transform: translateY(-50%);
+    }
+
+    ul ul a {
+        font-size: 0.9em !important;
+        padding-left: 30px !important;
+        background: #6d7fcc;
+    }
+
+    ul.CTAs {
+        padding: 20px;
+    }
+
+    ul.CTAs a {
+        text-align: center;
+        font-size: 0.9em !important;
+        display: block;
+        border-radius: 5px;
+        margin-bottom: 5px;
+    }
+
+    a.download {
+        background: #fff;
+        color: #7386D5;
+    }
+
+    a.article,
+    a.article:hover {
+        background: #6d7fcc !important;
+        color: #fff !important;
+    }
+
+
+
+    /* ---------------------------------------------------
+    CONTENT STYLE
+----------------------------------------------------- */
+
+    #content {
+        width: 100%;
+        padding: 20px;
+        min-height: 100vh;
+        transition: all 0.3s;
+    }
+
+    #sidebarCollapse {
+        width: 40px;
+        height: 40px;
+        background: #f5f5f5;
+        cursor: pointer;
+    }
+
+    #sidebarCollapse span {
+        width: 80%;
+        height: 2px;
+        margin: 0 auto;
+        display: block;
+        background: #555;
+        transition: all 0.8s cubic-bezier(0.810, -0.330, 0.345, 1.375);
+        transition-delay: 0.2s;
+    }
+
+    #sidebarCollapse span:first-of-type {
+        transform: rotate(45deg) translate(2px, 2px);
+    }
+
+    #sidebarCollapse span:nth-of-type(2) {
+        opacity: 0;
+    }
+
+    #sidebarCollapse span:last-of-type {
+        transform: rotate(-45deg) translate(1px, -1px);
+    }
+
+
+    #sidebarCollapse.active span {
+        transform: none;
+        opacity: 1;
+        margin: 5px auto;
+    }
+
+
+    /* ---------------------------------------------------
+    MEDIAQUERIES
+----------------------------------------------------- */
+
+    @media (max-width: 768px) {
+        #sidebar {
+            margin-left: -250px;
+            transform: rotateY(90deg);
+        }
+        #sidebar.active {
+            margin-left: 0;
+            transform: none;
+        }
+        #sidebarCollapse span:first-of-type,
+        #sidebarCollapse span:nth-of-type(2),
+        #sidebarCollapse span:last-of-type {
+            transform: none;
+            opacity: 1;
+            margin: 5px auto;
+        }
+        #sidebarCollapse.active span {
+            margin: 0 auto;
+        }
+        #sidebarCollapse.active span:first-of-type {
+            transform: rotate(45deg) translate(2px, 2px);
+        }
+        #sidebarCollapse.active span:nth-of-type(2) {
+            opacity: 0;
+        }
+        #sidebarCollapse.active span:last-of-type {
+            transform: rotate(-45deg) translate(1px, -1px);
+        }
+
+    }
+
+    .pre-scrollable {
+        overflow-y: scroll;
+        margin-left: -40px;
+    }
+
+    @media only screen and (min-width: 600px) {
+        .pre-scrollable {
+            max-height: 55vw;
+            overflow-y: scroll;
+            margin-left: -40px;
         }
     }
-}
-</script>
-    
+
+    @media only screen and (max-width: 800px) {
+        .pre-scrollable {
+            max-height: 350vw;
+            overflow-y: scroll;
+            margin-left: -40px;
+        }
+    }
+
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
+    html {
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+    }
+
+    html {
+        -ms-overflow-style: none;
+        overflow: auto;
+    }
+
+</style>
+
+<body>
+    <!-- Auto Select Textbox on Sidebar Open -->
+    <script>
+        var on = (function() {
+            if (window.addEventListener) {
+                return function(target, type, listener) {
+                    target.addEventListener(type, listener, false);
+                };
+            } else {
+                return function(object, sEvent, fpNotify) {
+                    object.attachEvent("on" + sEvent, fpNotify);
+                };
+            }
+        }());
+        var el = document.getElementById('theClick');
+        on(el, "click", function() {
+            document.getElementById('myInput').focus();
+        });
+
+    </script>
+    <script>
+        // Script to open and close sidebar
+        function w3_open() {
+            document.getElementById("mySidebar").style.display = "block";
+        }
+
+        function w3_close() {
+            document.getElementById("mySidebar").style.display = "none";
+        }
+
+    </script>
+
+    <!-- Search Bar -->
+    <script>
+        function myFunction() {
+            // Declare variables
+            var input, filter, ul, li, a, i;
+            input = document.getElementById('myInput');
+            filter = input.value.toUpperCase();
+            ul = document.getElementById("myList");
+            li = document.querySelectorAll(".ul li");
+
+            // Loop through all list items, and hide those who don't match the search query
+            for (i = 0; i < li.length; i++) {
+                a = li[i].getElementsByTagName("a")[0];
+                if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+                }
+            }
+        }
+
+    </script>
+    <div class="wrapper">
+        <!-- Sidebar Holder -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3><img src="https://cdn3.iconfinder.com/data/icons/business-travel-1/512/train-01-256.png" alt="" style="width:42px;height:42px;"><a href="https://mbta.io/">MBTA.io</a></h3>
+            </div>
+            <ul class="pre-scrollable">
+                <ul class="list-unstyled components">
+                    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Stops..">
+                    <li class="active">
+                        <li id="myList" class="ul">Orange Line
+                            <ul>
+                                <li><a href="https://mbta.io/Orange/place-ogmnl" onclick="w3_close()" class="w3-bar-item w3-button">Oak Grove</a></li>
+                                <li><a href="https://mbta.io/Orange/place-mlmnl" onclick="w3_close()" class="w3-bar-item w3-button">Malden Center</a></li>
+                                <li><a href="https://mbta.io/Orange/place-welln" onclick="w3_close()" class="w3-bar-item w3-button">Wellington</a></li>
+                                <li><a href="https://mbta.io/Orange/place-astao" onclick="w3_close()" class="w3-bar-item w3-button">Assembly</a></li>
+                                <li><a href="https://mbta.io/Orange/place-sull" onclick="w3_close()" class="w3-bar-item w3-button">Sullivan Square</a></li>
+                                <li><a href="https://mbta.io/Orange/place-ccmnl" onclick="w3_close()" class="w3-bar-item w3-button">Community College</a></li>
+                                <li><a href="https://mbta.io/Orange/place-north" onclick="w3_close()" class="w3-bar-item w3-button">North Station</a></li>
+                                <li><a href="https://mbta.io/Orange/place-haecl" onclick="w3_close()" class="w3-bar-item w3-button">Haymarket</a></li>
+                                <li><a href="https://mbta.io/Orange/place-state" onclick="w3_close()" class="w3-bar-item w3-button">State Street</a></li>
+                                <li><a href="https://mbta.io/Orange/place-dwnxg" onclick="w3_close()" class="w3-bar-item w3-button">Downtown Crossing</a></li>
+                                <li><a href="https://mbta.io/Orange/place-chncl" onclick="w3_close()" class="w3-bar-item w3-button">Chinatown</a></li>
+                                <li><a href="https://mbta.io/Orange/place-tumnl" onclick="w3_close()" class="w3-bar-item w3-button">Tufts Medical Center</a></li>
+                                <li><a href="https://mbta.io/Orange/place-bbsta" onclick="w3_close()" class="w3-bar-item w3-button">Back Bay</a></li>
+                                <li><a href="https://mbta.io/Orange/place-masta" onclick="w3_close()" class="w3-bar-item w3-button">Massachusetts Ave.</a></li>
+                                <li><a href="https://mbta.io/Orange/place-rugg" onclick="w3_close()" class="w3-bar-item w3-button">Ruggles</a></li>
+                                <li><a href="https://mbta.io/Orange/place-rcmnl" onclick="w3_close()" class="w3-bar-item w3-button">Roxbury Crossing</a></li>
+                                <li><a href="https://mbta.io/Orange/place-jaksn" onclick="w3_close()" class="w3-bar-item w3-button">Jackson Square</a></li>
+                                <li><a href="https://mbta.io/Orange/place-sbmnl" onclick="w3_close()" class="w3-bar-item w3-button">Stony Brook</a></li>
+                                <li><a href="https://mbta.io/Orange/place-grnst" onclick="w3_close()" class="w3-bar-item w3-button">Green Street</a></li>
+                                <li><a href="https://mbta.io/Orange/place-forhl" onclick="w3_close()" class="w3-bar-item w3-button">Forest Hill</a></li>
+                            </ul>
+                        </li>
+                        <li id="myList2" class="ul">Red Line
+                            <ul>
+                                <li><a href="https://mbta.io/Red/place-alfcl" onclick="w3_close()" class="w3-bar-item w3-button">Alewife</a></li>
+                                <li><a href="https://mbta.io/Red/place-davis" onclick="w3_close()" class="w3-bar-item w3-button">Davis</a></li>
+                                <li><a href="https://mbta.io/Red/place-portr" onclick="w3_close()" class="w3-bar-item w3-button">Porter</a></li>
+                                <li><a href="https://mbta.io/Red/place-harsq" onclick="w3_close()" class="w3-bar-item w3-button">Harvard</a></li>
+                                <li><a href="https://mbta.io/Red/place-cntsq" onclick="w3_close()" class="w3-bar-item w3-button">Central</a></li>
+                                <li><a href="https://mbta.io/Red/place-knncl" onclick="w3_close()" class="w3-bar-item w3-button">Kendall / MIT</a></li>
+                                <li><a href="https://mbta.io/Red/place-chmnl" onclick="w3_close()" class="w3-bar-item w3-button">Charles / MGH</a></li>
+                                <li><a href="https://mbta.io/Red/place-pktrm" onclick="w3_close()" class="w3-bar-item w3-button">Park Street</a></li>
+                                <li><a href="https://mbta.io/Red/place-dwnxg" onclick="w3_close()" class="w3-bar-item w3-button">Downtown Crossing</a></li>
+                                <li><a href="https://mbta.io/Red/place-sstat" onclick="w3_close()" class="w3-bar-item w3-button">South Station</a></li>
+                                <li><a href="https://mbta.io/Red/place-brdwy" onclick="w3_close()" class="w3-bar-item w3-button">Broadway</a></li>
+                                <li><a href="https://mbta.io/Red/place-andrw" onclick="w3_close()" class="w3-bar-item w3-button">Andrew</a></li>
+                                <li><a href="https://mbta.io/Red/place-jfk" onclick="w3_close()" class="w3-bar-item w3-button">JFK / UMass</a></li>
+                                <li><a href="https://mbta.io/Red/place-shmnl" onclick="w3_close()" class="w3-bar-item w3-button">Savin Hill</a></li>
+                                <li><a href="https://mbta.io/Red/place-fldcr" onclick="w3_close()" class="w3-bar-item w3-button">Fields Corner</a></li>
+                                <li><a href="https://mbta.io/Red/place-smmnl" onclick="w3_close()" class="w3-bar-item w3-button">Shawmut</a></li>
+                                <li><a href="https://mbta.io/Red/place-asmnl" onclick="w3_close()" class="w3-bar-item w3-button">Ashmont</a></li>
+                                <li><a href="https://mbta.io/Red/place-nqncy" onclick="w3_close()" class="w3-bar-item w3-button">North Quincy</a></li>
+                                <li><a href="https://mbta.io/Red/place-qnctr" onclick="w3_close()" class="w3-bar-item w3-button">Quincy Center</a></li>
+                                <li><a href="https://mbta.io/Red/place-qamnl" onclick="w3_close()" class="w3-bar-item w3-button">Quincy Adams</a></li>
+                                <li><a href="https://mbta.io/Red/place-brntn" onclick="w3_close()" class="w3-bar-item w3-button">Braintree</a></li>
+                            </ul>
+                        </li>
+                        <li id="myList3" class="ul">Green Line B
+                            <ul>
+                                <li><a href="https://mbta.io/Green-B/place-pktrm" onclick="w3_close()" class="w3-bar-item w3-button">Park Street</a></li>
+                                <li><a href="https://mbta.io/Green-B/place-boyls" onclick="w3_close()" class="w3-bar-item w3-button">Boylston</a></li>
+                                <li><a href="https://mbta.io/Green-B/place-armnl" onclick="w3_close()" class="w3-bar-item w3-button">Arlington</a></li>
+                                <li><a href="https://mbta.io/Green-B/place-coecl" onclick="w3_close()" class="w3-bar-item w3-button">Copley</a></li>
+                                <li><a href="https://mbta.io/Green-B/place-hymnl" onclick="w3_close()" class="w3-bar-item w3-button">Hynes Convention Center</a></li>
+                                <li><a href="https://mbta.io/Green-B/place-kencl" onclick="w3_close()" class="w3-bar-item w3-button">Kenmore</a></li>
+                                <li><a href="https://mbta.io/Green-B/place-bland" onclick="w3_close()" class="w3-bar-item w3-button">Blandford Street</a></li>
+                                <li><a href="https://mbta.io/Green-B/place-buest" onclick="w3_close()" class="w3-bar-item w3-button">Boston University East</a></li>
+                                <li><a href="https://mbta.io/Green-B/place-bucen" onclick="w3_close()" class="w3-bar-item w3-button">Boston University Central</a></li>
+                                <li><a href="https://mbta.io/Green-B/place-buwst" onclick="w3_close()" class="w3-bar-item w3-button">Boston University West</a></li>
+                                <li><a href="https://mbta.io/Green-B/place-stplb" onclick="w3_close()" class="w3-bar-item w3-button">Saint Paul Street</a></li>
+                                <li><a href="https://mbta.io/Green-B/place-plsgr" onclick="w3_close()" class="w3-bar-item w3-button">Pleasant Street</a></li>
+                                <li><a href="https://mbta.io/Green-B/place-babck" onclick="w3_close()" class="w3-bar-item w3-button">Babcock Street</a></li>
+                                <li><a href="https://mbta.io/Green-B/place-brico" onclick="w3_close()" class="w3-bar-item w3-button">Packards Corner</a></li>
+                                <li><a href="https://mbta.io/Green-B/place-harvd" onclick="w3_close()" class="w3-bar-item w3-button">Harvard Avenue</a></li>
+                                <li><a href="https://mbta.io/Green-B/place-grigg" onclick="w3_close()" class="w3-bar-item w3-button">Griggs Street</a></li>
+                                <li><a href="https://mbta.io/Green-B/place-alsgr" onclick="w3_close()" class="w3-bar-item w3-button">Allston Street</a></li>
+                                <li><a href="https://mbta.io/Green-B/place-wrnst" onclick="w3_close()" class="w3-bar-item w3-button">Warren Street</a></li>
+                                <li><a href="https://mbta.io/Green-B/place-wascm" onclick="w3_close()" class="w3-bar-item w3-button">Washington Street</a></li>
+                                <li><a href="https://mbta.io/Green-B/place-sthld" onclick="w3_close()" class="w3-bar-item w3-button">Sutherland Road</a></li>
+                                <li><a href="https://mbta.io/Green-B/place-chswk" onclick="w3_close()" class="w3-bar-item w3-button">Chiswick Road</a></li>
+                                <li><a href="https://mbta.io/Green-B/place-chill" onclick="w3_close()" class="w3-bar-item w3-button">Chestnut Hill Avenue</a></li>
+                                <li><a href="https://mbta.io/Green-B/place-sougr" onclick="w3_close()" class="w3-bar-item w3-button">South Street</a></li>
+                                <li><a href="https://mbta.io/Green-B/place-lake" onclick="w3_close()" class="w3-bar-item w3-button">Boston College</a></li>
+                            </ul>
+                        </li>
+                        <li id="myList4" class="ul">Green Line C
+                            <ul>
+                                <li><a href="https://mbta.io/Green-C/place-clmnl" onclick="w3_close()" class="w3-bar-item w3-button">Cleveland Circle</a></li>
+                                <li><a href="https://mbta.io/Green-C/place-engav" onclick="w3_close()" class="w3-bar-item w3-button">Englewood Avenue</a></li>
+                                <li><a href="https://mbta.io/Green-C/place-denrd" onclick="w3_close()" class="w3-bar-item w3-button">Dean Road</a></li>
+                                <li><a href="https://mbta.io/Green-C/place-tapst" onclick="w3_close()" class="w3-bar-item w3-button">Tappan Street</a></li>
+                                <li><a href="https://mbta.io/Green-C/place-bcnwa" onclick="w3_close()" class="w3-bar-item w3-button">Washington Square</a></li>
+                                <li><a href="https://mbta.io/Green-C/place-fbkst" onclick="w3_close()" class="w3-bar-item w3-button">Fairbanks Street</a></li>
+                                <li><a href="https://mbta.io/Green-C/place-bndhl" onclick="w3_close()" class="w3-bar-item w3-button">Brandon Hall</a></li>
+                                <li><a href="https://mbta.io/Green-C/place-sumav" onclick="w3_close()" class="w3-bar-item w3-button">Summit Avenue</a></li>
+                                <li><a href="https://mbta.io/Green-C/place-cool" onclick="w3_close()" class="w3-bar-item w3-button">Coolidge Corner</a></li>
+                                <li><a href="https://mbta.io/Green-C/place-stpul" onclick="w3_close()" class="w3-bar-item w3-button">Saint Paul Street</a></li>
+                                <li><a href="https://mbta.io/Green-C/place-kntst" onclick="w3_close()" class="w3-bar-item w3-button">Kent Street</a></li>
+                                <li><a href="https://mbta.io/Green-C/place-hwsst" onclick="w3_close()" class="w3-bar-item w3-button">Hawes Street</a></li>
+                                <li><a href="https://mbta.io/Green-C/place-smary" onclick="w3_close()" class="w3-bar-item w3-button">Saint Marys Street</a></li>
+                                <li><a href="https://mbta.io/Green-C/place-kencl" onclick="w3_close()" class="w3-bar-item w3-button">Kenmore</a></li>
+                                <li><a href="https://mbta.io/Green-C/place-hymnl" onclick="w3_close()" class="w3-bar-item w3-button">Hynes Convention Center</a></li>
+                                <li><a href="https://mbta.io/Green-C/place-coecl" onclick="w3_close()" class="w3-bar-item w3-button">Copley</a></li>
+                                <li><a href="https://mbta.io/Green-C/place-armnl" onclick="w3_close()" class="w3-bar-item w3-button">Arlington</a></li>
+                                <li><a href="https://mbta.io/Green-C/place-boyls" onclick="w3_close()" class="w3-bar-item w3-button">Boylston</a></li>
+                                <li><a href="https://mbta.io/Green-C/place-pktrm" onclick="w3_close()" class="w3-bar-item w3-button">Park Street</a></li>
+                                <li><a href="https://mbta.io/Green-C/place-gover" onclick="w3_close()" class="w3-bar-item w3-button">Government Center</a></li>
+                                <li><a href="https://mbta.io/Green-C/place-haecl" onclick="w3_close()" class="w3-bar-item w3-button">Haymarket</a></li>
+                                <li><a href="https://mbta.io/Green-C/place-north" onclick="w3_close()" class="w3-bar-item w3-button">North Station</a></li>
+                            </ul>
+                        </li>
+                        <li id="myList5" class="ul">Green Line D
+                            <ul>
+                                <li><a href="https://mbta.io/Green-D/place-river" onclick="w3_close()" class="w3-bar-item w3-button">Riverside</a></li>
+                                <li><a href="https://mbta.io/Green-D/place-woodl" onclick="w3_close()" class="w3-bar-item w3-button">Woodland</a></li>
+                                <li><a href="https://mbta.io/Green-D/place-waban" onclick="w3_close()" class="w3-bar-item w3-button">Waban</a></li>
+                                <li><a href="https://mbta.io/Green-D/place-eliot" onclick="w3_close()" class="w3-bar-item w3-button">Eliot</a></li>
+                                <li><a href="https://mbta.io/Green-D/place-newtn" onclick="w3_close()" class="w3-bar-item w3-button">Newton Highlands</a></li>
+                                <li><a href="https://mbta.io/Green-D/place-newto" onclick="w3_close()" class="w3-bar-item w3-button">Newton Centre</a></li>
+                                <li><a href="https://mbta.io/Green-D/place-chhil" onclick="w3_close()" class="w3-bar-item w3-button">Chestnut Hill</a></li>
+                                <li><a href="https://mbta.io/Green-D/place-rsmnl" onclick="w3_close()" class="w3-bar-item w3-button">Reservoir</a></li>
+                                <li><a href="https://mbta.io/Green-D/place-bcnfd" onclick="w3_close()" class="w3-bar-item w3-button">Beaconsfield</a></li>
+                                <li><a href="https://mbta.io/Green-D/place-brkhl" onclick="w3_close()" class="w3-bar-item w3-button">Brookline Hills</a></li>
+                                <li><a href="https://mbta.io/Green-D/place-bvmnl" onclick="w3_close()" class="w3-bar-item w3-button">Brookline Village</a></li>
+                                <li><a href="https://mbta.io/Green-D/place-longw" onclick="w3_close()" class="w3-bar-item w3-button">Longwood</a></li>
+                                <li><a href="https://mbta.io/Green-D/place-fenwy" onclick="w3_close()" class="w3-bar-item w3-button">Fenway</a></li>
+                                <li><a href="https://mbta.io/Green-D/place-kencl" onclick="w3_close()" class="w3-bar-item w3-button">Kenmore</a></li>
+                                <li><a href="https://mbta.io/Green-D/place-hymnl" onclick="w3_close()" class="w3-bar-item w3-button">Hynes Convention Center</a></li>
+                                <li><a href="https://mbta.io/Green-D/place-coecl" onclick="w3_close()" class="w3-bar-item w3-button">Copley</a></li>
+                                <li><a href="https://mbta.io/Green-D/place-armnl" onclick="w3_close()" class="w3-bar-item w3-button">Arlington</a></li>
+                                <li><a href="https://mbta.io/Green-D/place-boyls" onclick="w3_close()" class="w3-bar-item w3-button">Boylston</a></li>
+                                <li><a href="https://mbta.io/Green-D/place-pktrm" onclick="w3_close()" class="w3-bar-item w3-button">Park Street</a></li>
+                                <li><a href="https://mbta.io/Green-D/place-gover" onclick="w3_close()" class="w3-bar-item w3-button">Government Center</a></li>
+                            </ul>
+                        </li>
+                        <li id="myList6" class="ul">Green Line E
+                            <ul>
+                                <li><a href="https://mbta.io/Green-E/place-hsmnl" onclick="w3_close()" class="w3-bar-item w3-button">Heath Street</a></li>
+                                <li><a href="https://mbta.io/Green-E/place-bckhl" onclick="w3_close()" class="w3-bar-item w3-button">Back of the Hill</a></li>
+                                <li><a href="https://mbta.io/Green-E/place-rvrwy" onclick="w3_close()" class="w3-bar-item w3-button">Riverway</a></li>
+                                <li><a href="https://mbta.io/Green-E/place-mispk" onclick="w3_close()" class="w3-bar-item w3-button">Mission Park</a></li>
+                                <li><a href="https://mbta.io/Green-E/place-fenwd" onclick="w3_close()" class="w3-bar-item w3-button">Fenwood Road</a></li>
+                                <li><a href="https://mbta.io/Green-E/place-brmnl" onclick="w3_close()" class="w3-bar-item w3-button">Brigham Circle</a></li>
+                                <li><a href="https://mbta.io/Green-E/place-lngmd" onclick="w3_close()" class="w3-bar-item w3-button">Longwood Medical Area</a></li>
+                                <li><a href="https://mbta.io/Green-E/place-mfa" onclick="w3_close()" class="w3-bar-item w3-button">Museum of Fine Arts</a></li>
+                                <li><a href="https://mbta.io/Green-E/place-nuniv" onclick="w3_close()" class="w3-bar-item w3-button">Northeastern University</a></li>
+                                <li><a href="https://mbta.io/Green-E/place-symcl" onclick="w3_close()" class="w3-bar-item w3-button">Symphony</a></li>
+                                <li><a href="https://mbta.io/Green-E/place-prmnl" onclick="w3_close()" class="w3-bar-item w3-button">Prudential</a></li>
+                                <li><a href="https://mbta.io/Green-E/place-coecl" onclick="w3_close()" class="w3-bar-item w3-button">Copley</a></li>
+                                <li><a href="https://mbta.io/Green-E/place-armnl" onclick="w3_close()" class="w3-bar-item w3-button">Arlington</a></li>
+                                <li><a href="https://mbta.io/Green-E/place-boyls" onclick="w3_close()" class="w3-bar-item w3-button">Boylston</a></li>
+                                <li><a href="https://mbta.io/Green-E/place-pktrm" onclick="w3_close()" class="w3-bar-item w3-button">Park Street</a></li>
+                                <li><a href="https://mbta.io/Green-E/place-gover" onclick="w3_close()" class="w3-bar-item w3-button">Government Center</a></li>
+                                <li><a href="https://mbta.io/Green-E/place-haecl" onclick="w3_close()" class="w3-bar-item w3-button">Haymarket</a></li>
+                                <li><a href="https://mbta.io/Green-E/place-north" onclick="w3_close()" class="w3-bar-item w3-button">North Station</a></li>
+                                <li><a href="https://mbta.io/Green-E/place-spmnl" onclick="w3_close()" class="w3-bar-item w3-button">Science Park</a></li>
+                                <li><a href="https://mbta.io/Green-E/place-lech" onclick="w3_close()" class="w3-bar-item w3-button">Lechmere</a></li>
+                            </ul>
+                        </li>
+                        <li id="myList7" class="ul">Blue
+                            <ul>
+                                <li><a href="https://mbta.io/Blue/place-bomnl" onclick="w3_close()" class="w3-bar-item w3-button">Bowdoin</a></li>
+                                <li><a href="https://mbta.io/Blue/place-gover" onclick="w3_close()" class="w3-bar-item w3-button">Government Center</a></li>
+                                <li><a href="https://mbta.io/Blue/place-state" onclick="w3_close()" class="w3-bar-item w3-button">State Street</a></li>
+                                <li><a href="https://mbta.io/Blue/place-aqucl" onclick="w3_close()" class="w3-bar-item w3-button">Aquarium</a></li>
+                                <li><a href="https://mbta.io/Blue/place-mvbcl" onclick="w3_close()" class="w3-bar-item w3-button">Maverick</a></li>
+                                <li><a href="https://mbta.io/Blue/place-aport" onclick="w3_close()" class="w3-bar-item w3-button">Airport</a></li>
+                                <li><a href="https://mbta.io/Blue/place-wimnl" onclick="w3_close()" class="w3-bar-item w3-button">Wood Island</a></li>
+                                <li><a href="https://mbta.io/Blue/place-orhte" onclick="w3_close()" class="w3-bar-item w3-button">Orient Heights</a></li>
+                                <li><a href="https://mbta.io/Blue/place-sdmnl" onclick="w3_close()" class="w3-bar-item w3-button">Suffolk Downs</a></li>
+                                <li><a href="https://mbta.io/Blue/place-bmmnl" onclick="w3_close()" class="w3-bar-item w3-button">Beachmont</a></li>
+                                <li><a href="https://mbta.io/Blue/place-rbmnl" onclick="w3_close()" class="w3-bar-item w3-button">Revere Beach</a></li>
+                                <li><a href="https://mbta.io/Blue/place-wondl" onclick="w3_close()" class="w3-bar-item w3-button">Wonderland</a></li>
+                            </ul>
+                        </li>
+                </ul>
+            </ul>
+        </nav>
+
+        <!-- Page Content Holder -->
+        <div id="content">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <button type="button" id="sidebarCollapse" class="navbar-btn">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <div id='walking_distance'></div>
+                </div>
+            </nav>
+
+            <script>
+                vehicle_latS = 0.00
+                vehicle_lonS = 0.00
+                vehicle_latN = 0.00
+                vehicle_lonN = 0.00
+
+                setInterval(function() {
+                    site = window.location.href;
+                    site = site.split('io')[1];
+                    site = "https://mbta.io/live" + site;
+                    $.get(site, function(data) {
+                        $("#seconds_awayS").text(data.tDifference1)
+                        $("#seconds_away_twoS").text(data.tDifference2)
+                        $("#seconds_awayN").text(data.tDifference1S)
+                        $("#seconds_away_twoN").text(data.tDifference2S)
+                        vehicle_latS = data.vehicle_latS;
+                        vehicle_lonS = data.vehicle_lonS;
+                        vehicle_latN = data.vehicle_latN;
+                        vehicle_lonN = data.vehicle_lonN;
+
+                    });
+                    GoogleMapsS = "https://www.google.com/maps/embed/v1/place?key=AIzaSyD_kdRfKhXAAgGbLVCXGHC3vSRNOOoHc0c&q=" + vehicle_latS + ",+" + vehicle_lonS;
+                    GoogleMapsN = "https://www.google.com/maps/embed/v1/place?key=AIzaSyD_kdRfKhXAAgGbLVCXGHC3vSRNOOoHc0c&q=" + vehicle_latN + ",+" + vehicle_lonN;
+                }, 2000);
+
+                setInterval(function() {
+                    document.getElementById('frame2').setAttribute('src', GoogleMapsS);
+                    document.getElementById('frame1').setAttribute('src', GoogleMapsN);
+                }, 30000);
+
+            </script>
+
+            <!-- !PAGE CONTENT! -->
+            <div style="max-width:1200px;">
+                <h5 id='stop_Location'>{{stop_name}} | {{route_name}}</h5>
+                <!-- First Photo Grid-->
+                <div>
+                    <div class="resp-container">
+                        <iframe id='frame1' class="resp-iframe" width="572" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD_kdRfKhXAAgGbLVCXGHC3vSRNOOoHc0c&q={{vehicle_latN}},+{{vehicle_lonN}}" allowfullscreen>
+        </iframe>
+                        <h6>{{route_directionN}}</h6>
+                        <h5>Now : <em id='seconds_awayS'>{{tDifference1}}</em> Min Away</h5>
+                        <h5>Next: <em id='seconds_away_twoS'> {{tDifference2}}</em> Min Away</h5>
+                    </div>
+
+                    <div class="resp-container">
+                        <iframe id='frame2' class="resp-iframe" width="572" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD_kdRfKhXAAgGbLVCXGHC3vSRNOOoHc0c&q={{vehicle_latS}},+{{vehicle_lonS}}" allowfullscreen>
+        </iframe>
+                        <h6>{{route_directionS}}</h6>
+                        <h5>Now : <em id='seconds_awayN'>{{tDifference1S}}</em> Min Away</h5>
+                        <h5>Next: <em id='seconds_away_twoN'>{{tDifference2S}}</em> Min Away</h5>
+                    </div>
+                </div>
+
+
+
+                <!-- End page content -->
+            </div>
+
+        </div>
+    </div>
+
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script>
+        function distancee() {
+            if (walking_distance_total != "") {
+                $("#walking_distance").append("<p>" + walking_distance_total + " Walking" + "</p>")
+            }
+        }
+        $(window).load(setTimeout(distancee, 3000));
+
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#sidebarCollapse').on('click', function() {
+                $('#sidebar').toggleClass('active');
+                $(this).toggleClass('active');
+            });
+        });
+
+    </script>
 </body>
+
 </html>
